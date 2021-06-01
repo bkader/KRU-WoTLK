@@ -11,7 +11,7 @@ This addon was part of [KPack](https://github.com/bkader/KPack), it was extracte
 
 # Modules
 
-The addon currently contains **6** modules, but more can be added if needed/requested and judged useful.
+The addon currently contains **8** modules, but more can be added if needed/requested and judged useful.
 
 ## Raid Menu
 
@@ -40,6 +40,10 @@ It tracks _Sunder Armor_ usage. If the display header (_title_) is shown, you ca
 ## Raid Cooldowns
 
 A simple and customizable raid cooldowns tracker, a clone of **RaidCooldowns**. Command: `/rcd`.
+
+## Combat Timer
+
+A simple yet customizable combat timer that can use its own frame or the in-game Stopwatch.
 
 # Show Love & Support
 
