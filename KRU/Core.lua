@@ -22,6 +22,9 @@ function addon:OnInitialize()
 	self.db = LibStub("AceDB-3.0"):New("KRUDB", self.defaults, "Default")
 	LibStub("AceConfig-3.0"):RegisterOptionsTable("KRU", self.options)
 	self.optionsFrame = self.ACD:AddToBlizOptions("KRU", "KRU")
+	SLASH_KRUMAIN1 = "/kru"
+	SLASH_KRUMAIN2 = "/raidutilities"
+	SlashCmdList.KRUMAIN = function() self:OpenConfig() end
 end
 
 function addon:Print(...)

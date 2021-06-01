@@ -76,3 +76,8 @@ local L = addon.L
 -- L["Never show my spells"] = ""
 -- L["Icon"] = ""
 -- L["Duration"] = ""
+
+-- combat timer
+-- L["Combat Timer"] = ""
+-- L["Trigger the in-game stopwatch on combat."] = ""
+-- L["Color"] = ""

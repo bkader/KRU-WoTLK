@@ -92,3 +92,8 @@ L["Only show my spells"] = true
 L["Never show my spells"] = true
 L["Icon"] = true
 L["Duration"] = true
+
+-- combat timer
+L["Combat Timer"] = true
+L["Trigger the in-game stopwatch on combat."] = true
+L["Color"] = true

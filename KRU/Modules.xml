@@ -7,4 +7,5 @@
 <Script file="Modules\Mana.lua" />
 <Script file="Modules\Cooldowns.lua" />
 <Script file="Modules\Invites.lua" />
+<Script file="Modules\CombatTime.lua" />
 </Ui>

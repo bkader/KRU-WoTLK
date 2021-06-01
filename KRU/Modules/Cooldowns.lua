@@ -274,7 +274,7 @@ function GetOptions()
 		options = {
 			type = "group",
 			name = L["Raid Cooldowns"],
-			order = order,
+			order = 7,
 			get = function(i)
 				return mod.db[i[#i]]
 			end,

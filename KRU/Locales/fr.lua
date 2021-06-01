@@ -77,3 +77,8 @@ L["Only show my spells"] = "Seulement mes sorts"
 L["Never show my spells"] = "Jamais mes sorts"
 L["Icon"] = "Icône"
 L["Duration"] = "Durée"
+
+-- combat timer
+L["Combat Timer"] = "Chrono. de combat"
+L["Trigger the in-game stopwatch on combat."] = "Déclencher le chronomètre du jeu au combat."
+L["Color"] = "Couleur"
