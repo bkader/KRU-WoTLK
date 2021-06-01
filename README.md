@@ -2,6 +2,13 @@
 
 This addon was part of [KPack](https://github.com/bkader/KPack), it was extracted and made as a standalone addon after few requests.
 
+# How to install
+
+1. [Download the package](https://github.com/bkader/KRU-WoTLK/archive/refs/heads/main.zip).
+2. Open the archive, then open folder `KRU-WoTLK-main`.
+3. Extract the single folder `KRU` to `Interface\AddOns`.
+4. Enjoy!
+
 # Modules
 
 The addon currently contains **6** modules, but more can be added if needed/requested and judged useful.
@@ -30,6 +37,6 @@ Tracks the mana of healers in your party or raid. It shows the percentages of th
 
 It tracks _Sunder Armor_ usage. If the display header (_title_) is shown, you can right-click on it to open a menu to **Report** or **Reset** counter. If you choose to hide the title, you can always used the provided slash commands. Commands: `/sunder`, `/sunder report` and `/sunder reset`
 
-## Show Love & Support
+# Show Love & Support
 
 Though it's not required and I have never asked for it but people keep asking for it, if you want to show love and support, your PayPal donations are most welcome to **bkader[at]email.com**.
