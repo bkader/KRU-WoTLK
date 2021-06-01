@@ -69,7 +69,7 @@ end
 function addon:SavePosition(f, db, withSize)
 	if f then
 		local x, y = f:GetLeft(), f:GetTop()
-		local s = f:GetEffectiveScale()
+		local s = db.scale or f:GetEffectiveScale()
 		db.xOfs, db.yOfs = x * s, y * s
 
 		if withSize then
@@ -92,7 +92,7 @@ function addon:RestorePosition(f, db, withSize)
 			return false
 		end
 
-		local s = f:GetEffectiveScale()
+		local s = db.scale or f:GetEffectiveScale()
 		f:ClearAllPoints()
 		f:SetPoint("TOPLEFT", UIParent, "BOTTOMLEFT", x / s, y / s)
 

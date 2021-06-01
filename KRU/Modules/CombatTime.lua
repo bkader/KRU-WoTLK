@@ -112,7 +112,7 @@ local floor, GetTime, format = math.floor, GetTime, string.format
 
 local function CreateTimerFrame()
 	local frame = CreateFrame("Frame", "KRUCombatTimer")
-	frame:SetSize(80, 25)
+	frame:SetSize(85, 25)
 	frame:SetFrameStrata("LOW")
 	frame:SetPoint("TOPLEFT", Minimap, "BOTTOMLEFT", 0, -10)
 
@@ -134,11 +134,11 @@ local function CreateTimerFrame()
 
 	-- timer text
 	local timer = frame:CreateFontString(nil, "OVERLAY")
-	timer:SetFont(LSM:Fetch("font", mod.db.font), 12, mod.db.fontFlags)
+	timer:SetFont(LSM:Fetch("font", mod.db.font), 14, mod.db.fontFlags)
 	timer:SetTextColor(unpack(mod.db.color))
 	timer:SetJustifyH("CENTER")
 	timer:SetAllPoints(frame)
-	timer:SetText("00:00:00")
+	timer:SetText("00:00")
 	frame.timer = timer
 
 	if mod.db.stopwatch then
@@ -161,7 +161,11 @@ local function OnUpdate(self, elapsed)
 		local _min = floor(total / 60 - (_hor * 60))
 		local _sec = floor(total - _hor * 3600 - _min * 60)
 
-		self.timer:SetText(format("%02d:%02d:%02d", _hor, _min, _sec))
+		if _hor > 0 then
+			self.timer:SetText(format("%02d:%02d:%02d", _hor, _min, _sec))
+		else
+			self.timer:SetText(format("%02d:%02d", _min, _sec))
+		end
 		self.elapsed = 0
 	end
 end
@@ -188,7 +192,7 @@ function mod:ApplySettings()
 	end
 
 	self.frame:SetScale(self.db.scale or 1)
-	self.frame.timer:SetFont(LSM:Fetch("font", self.db.font), 12, self.db.fontFlags)
+	self.frame.timer:SetFont(LSM:Fetch("font", self.db.font), 14, self.db.fontFlags)
 	self.frame.timer:SetTextColor(unpack(self.db.color))
 
 	if self.db.locked then
