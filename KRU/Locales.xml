@@ -1,0 +1,65 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+<Script file="Locales\en.lua" />
+<Script file="Locales\cn.lua" />
+<Script file="Locales\de.lua" />
+<Script file="Locales\es.lua" />
+<Script file="Locales\fr.lua" />
+<Script file="Locales\kr.lua" />
+<Script file="Locales\ru.lua" />
+<Script file="Locales\tw.lua" />
+
+<!-- Blizzard default buttons suck! -->
+<Button name="KRUButtonTemplate" virtual="true">
+	<Size><AbsDimension x="25" y="25" /></Size>
+	<NormalFont style="GameFontNormal" />
+	<DisabledFont style="GameFontDisable" />
+	<HighlightFont style="GameFontHighlight" />
+	<ButtonText name="$parentText">
+		<Anchors>
+			<Anchor point="LEFT">
+				<Offset><AbsDimension x="5" y="1" /></Offset>
+			</Anchor>
+			<Anchor point="RIGHT">
+				<Offset><AbsDimension x="-5" y="1" /></Offset>
+			</Anchor>
+		</Anchors>
+	</ButtonText>
+	<Layers>
+		<Layer level="BACKGROUND">
+			<Texture name="$parentLeft" file="Interface\Buttons\UI-Panel-Button-Up">
+				<Size><AbsDimension x="12" /></Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" />
+					<Anchor point="BOTTOMLEFT" />
+				</Anchors>
+				<TexCoords left="0" right="0.09374" top="0" bottom="0.6875" />
+			</Texture>
+			<Texture name="$parentRight" file="Interface\Buttons\UI-Panel-Button-Up">
+				<Size><AbsDimension x="12" /></Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT" />
+					<Anchor point="BOTTOMRIGHT" />
+				</Anchors>
+				<TexCoords left="0.53125" right="0.625" top="0" bottom="0.6875" />
+			</Texture>
+			<Texture name="$parentMiddle" file="Interface\Buttons\UI-Panel-Button-Up">
+				<Size><AbsDimension x="12" /></Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset><AbsDimension x="12" y="0" /></Offset>
+					</Anchor>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset><AbsDimension x="-12" y="0" /></Offset>
+					</Anchor>
+				</Anchors>
+				<TexCoords left="0.09375" right="0.53125" top="0" bottom="0.6875" />
+			</Texture>
+		</Layer>
+	</Layers>
+	<HighlightTexture inherits="UIPanelButtonHighlightTexture" mod="ADD" />
+	<PushedTexture inherits="UIPanelButtonPushedTexture" mod="ADD" />
+	<DisabledTexture inherits="UIPanelButtonDisabledTexture" />
+	<Scripts><OnLoad>self:RegisterForClicks("AnyUp")</OnLoad></Scripts>
+</Button>
+</Ui>
