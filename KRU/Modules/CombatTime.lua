@@ -111,10 +111,9 @@ KRU.options.args.combattimer = {
 local floor, GetTime, format = math.floor, GetTime, string.format
 
 local function CreateTimerFrame()
-	local frame = CreateFrame("Frame", "KRUCombatTimer")
+	local frame = CreateFrame("Frame", "KRUCombatTimer", nil, UIParent)
 	frame:SetSize(85, 25)
 	frame:SetFrameStrata("LOW")
-	frame:SetPoint("TOPLEFT", Minimap, "BOTTOMLEFT", 0, -10)
 
 	-- make the frame movable
 	frame:SetMovable(true)
