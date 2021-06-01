@@ -35,7 +35,11 @@ Tracks the mana of healers in your party or raid. It shows the percentages of th
 
 ## Sunder Armor
 
-It tracks _Sunder Armor_ usage. If the display header (_title_) is shown, you can right-click on it to open a menu to **Report** or **Reset** counter. If you choose to hide the title, you can always used the provided slash commands. Commands: `/sunder`, `/sunder report` and `/sunder reset`
+It tracks _Sunder Armor_ usage. If the display header (_title_) is shown, you can right-click on it to open a menu to **Report** or **Reset** counter. If you choose to hide the title, you can always used the provided slash commands. Commands: `/sunder`, `/sunder report` and `/sunder reset`.
+
+## Raid Cooldowns
+
+A simple and customizable raid cooldowns tracker, a clone of **RaidCooldowns**. Command: `/rcd`.
 
 # Show Love & Support
 
