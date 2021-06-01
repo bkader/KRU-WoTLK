@@ -1,4 +1,4 @@
-# KRT - Kader's Raid Utilities
+# KRU - Kader's Raid Utilities
 
 This addon was part of [KPack](https://github.com/bkader/KPack), it was extracted and made as a standalone addon after few requests.
 
