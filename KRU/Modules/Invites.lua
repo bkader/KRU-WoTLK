@@ -302,8 +302,15 @@ function mod:OnEnable()
 	end
 
 	SLASH_KRUINVITES1 = "/invites"
-	SlashCmdList.KRUINVITES = function()
-		KRU:OpenConfig("invites")
+	SlashCmdList.KRUINVITES = function(cmd)
+		cmd = cmd and cmd:lower():trim()
+		if cmd == "guild" then
+			InviteGuild()
+		elseif cmd == "zone" then
+			InviteZone()
+		else
+			KRU:OpenConfig("invites")
+		end
 	end
 end
 
