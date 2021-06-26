@@ -1,4 +1,5 @@
 assert(KRU, "Raid Utilities not found!")
+local KRU = KRU
 
 -- > start of module declaration and options < --
 local L = KRU.L
@@ -397,11 +398,11 @@ do
 		end
 	end
 
-	local function OnEvent(self, event, ...)
+	local function OnEvent(self, event, _, eventtype, _, srcName, _, _, _, _, _, spellname)
 		if not self or self ~= display or event ~= "COMBAT_LOG_EVENT_UNFILTERED" then
 			return
-		elseif arg4 and KRU:CheckUnit(arg4) and arg2 == "SPELL_CAST_SUCCESS" and arg10 and arg10 == sunder then
-			AddSunder(arg4)
+		elseif srcName and KRU:CheckUnit(srcName) and eventtype == "SPELL_CAST_SUCCESS" and spellname and spellname == sunder then
+			AddSunder(srcName)
 		end
 	end
 

@@ -1,4 +1,5 @@
 assert(KRU, "Raid Utilities not found!")
+local KRU = KRU
 
 -- > start of module declaration and options < --
 local L = KRU.L

@@ -1,4 +1,5 @@
 assert(KRU, "Raid Utilities not found!")
+local KRU = KRU
 
 -- > start of module declaration and options < --
 local L = KRU.L
@@ -57,8 +58,6 @@ local GetOptions, options
 local barGroups, inGroup
 local playername = UnitName("player")
 -- > end of module declaration and options < --
-
-local strformat = string.format
 
 local pairs, select, unpack = pairs, select, unpack
 local type, strformat = type, string.format
@@ -793,14 +792,14 @@ do
 		return flags and (band(flags, group) ~= 0) or nil
 	end
 
-	function mod:COMBAT_LOG_EVENT_UNFILTERED(...)
-		if arg2 and events[arg2] and inGroup(arg5) and arg9 then
-			if (arg9 == 35079 or arg9 == 34477) and self.db.spells[34477] then
-				self:StartCooldown(arg4, 34477, allSpells[34477], arg7)
-			elseif (arg9 == 59628 or arg9 == 57934) and self.db.spells[57934] then
-				self:StartCooldown(arg4, 57934, allSpells[57934], arg7)
-			elseif self.db.spells[arg9] then
-				self:StartCooldown(arg4, arg9, allSpells[arg9], arg7)
+	function mod:COMBAT_LOG_EVENT_UNFILTERED(_, _, event, _, srcName, srcFlags, _, dstName, _, spellid)
+		if event and events[event] and inGroup(srcFlags) and spellid then
+			if (spellid == 35079 or spellid == 34477) and self.db.spells[34477] then
+				self:StartCooldown(srcName, 34477, allSpells[34477], dstName)
+			elseif (spellid == 59628 or spellid == 57934) and self.db.spells[57934] then
+				self:StartCooldown(srcName, 57934, allSpells[57934], dstName)
+			elseif self.db.spells[spellid] then
+				self:StartCooldown(srcName, spellid, allSpells[spellid], dstName)
 			end
 		end
 	end

@@ -1,4 +1,5 @@
 assert(KRU, "Raid Utilities not found!")
+local KRU = KRU
 
 -- > start of module declaration and options < --
 local L = KRU.L
@@ -509,7 +510,7 @@ do
 		PLAYER_REGEN_DISABLED = true
 	}
 
-	local function OnEvent(self, event, ...)
+	local function OnEvent(self, event, unit)
 		if not firstrun then
 			CacheHealers()
 			firstrun = true
@@ -519,16 +520,16 @@ do
 			return
 		elseif cacheEvents[event] then
 			CacheHealers()
-		elseif arg1 and KRU:CheckUnit(arg1) and healers[arg1] then
+		elseif unit and KRU:CheckUnit(unit) and healers[unit] then
 			if event == "UNIT_MANA" then
-				UpdateMana(arg1, UnitPower(arg1, 0), UnitPowerMax(arg1, 0))
+				UpdateMana(unit, UnitPower(unit, 0), UnitPowerMax(unit, 0))
 			elseif event == "UNIT_AURA" then
-				local f = _G["KPackHealersMana" .. UnitName(arg1)]
+				local f = _G["KPackHealersMana" .. UnitName(unit)]
 				if not f then
 					return
 				end
 
-				local _, _, icon, _, _, duration, _, _, _, _, _ = UnitBuff(arg1, TUTORIAL_TITLE12)
+				local _, _, icon, _, _, duration, _, _, _, _, _ = UnitBuff(unit, TUTORIAL_TITLE12)
 				if icon then
 					f._icon = f._icon or f.icon:GetTexture()
 					f.icon:SetTexture(icon)

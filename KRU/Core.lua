@@ -45,15 +45,15 @@ function addon:OpenConfig(...)
 	end
 end
 
-function KRU:CheckUnit(unit)
+function addon:CheckUnit(unit)
 	return (unit and (UnitInParty(unit) or UnitInRaid(unit)) and UnitIsPlayer(unit) and UnitIsFriend("player", unit))
 end
 
-function KRU:InGroup()
+function addon:InGroup()
 	return (GetNumRaidMembers() > 0 or GetNumPartyMembers() > 0)
 end
 
-function KRU:IsPromoted(name)
+function addon:IsPromoted(name)
 	name = name or "player"
 	if UnitInRaid(name) then
 		return UnitIsRaidOfficer(name), "raid"

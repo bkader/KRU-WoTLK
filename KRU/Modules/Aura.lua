@@ -1,4 +1,5 @@
 assert(KRU, "Raid Utilities not found!")
+local KRU = KRU
 
 -- > start of module declaration and options < --
 local L = KRU.L
@@ -563,27 +564,27 @@ do
 		RAID_ROSTER_UPDATE = true
 	}
 
-	local function OnEvent(self, event, ...)
+	local function OnEvent(self, event, _, eventtype, _, srcName, _, _, dstName, _, spellid, spellname)
 		if not self or self ~= display or not (event == "COMBAT_LOG_EVENT_UNFILTERED" or cacheEvents[event]) then
 			return
 		elseif cacheEvents[event] then
 			ResetFrames()
 			fetched, rendered = nil, nil
-		elseif arg2 == "SPELL_AURA_APPLIED" and arg4 and KRU:CheckUnit(arg4) then
-			if spellIcons[arg10] and arg7 and arg7 == playername then
-				AddAura(arg10, arg4)
-			elseif arg10 == auraMastery then
-				local f = _G["KRUPaladinAuras" .. arg4]
+		elseif eventtype == "SPELL_AURA_APPLIED" and srcName and KRU:CheckUnit(srcName) then
+			if spellIcons[spellname] and dstName and dstName == playername then
+				AddAura(spellname, srcName)
+			elseif spellname == auraMastery then
+				local f = _G["KRUPaladinAuras" .. srcName]
 				if f then
 					f.am:Show()
 					CooldownFrame_SetTimer(f.cooldown, GetTime(), 6, 1)
 				end
 			end
-		elseif arg2 == "SPELL_AURA_REMOVED" and arg4 and KRU:CheckUnit(arg4) then
-			if spellIcons[arg10] and arg7 and arg7 == playername then
-				RemoveAura(arg10, arg4)
-			elseif arg10 == auraMastery then
-				local f = _G["KRUPaladinAuras" .. arg4]
+		elseif eventtype == "SPELL_AURA_REMOVED" and srcName and KRU:CheckUnit(srcName) then
+			if spellIcons[spellname] and dstName and dstName == playername then
+				RemoveAura(spellname, srcName)
+			elseif spellname == auraMastery then
+				local f = _G["KRUPaladinAuras" .. srcName]
 				if f then
 					rendered = nil
 					f.am:Hide()

@@ -1,8 +1,10 @@
 assert(KRU, "Raid Utilities not found!")
+local KRU = KRU
 
 -- > start of module declaration and options < --
 local L = KRU.L
 local mod = KRU:NewModule(L["Raid Menu"], "AceEvent-3.0")
+local _
 
 local defaults = {
 	enabled = true,
@@ -148,7 +150,7 @@ local function CreateRaidUtilityPanel()
 	showButton:SetFrameStrata("HIGH")
 	showButton:SetScript("OnDragStart", function(self)
 		if InCombatLockdown() then
-			Print(ERR_NOT_IN_COMBAT)
+			KRU:Print(ERR_NOT_IN_COMBAT)
 			return
 		elseif mod.db.locked then
 			return
@@ -226,7 +228,7 @@ local function CreateRaidUtilityPanel()
 	control:SetText(L["Raid Menu"])
 	control:SetScript("OnMouseUp", function()
 		if InCombatLockdown() then
-			Print(ERR_NOT_IN_COMBAT)
+			KRU:Print(ERR_NOT_IN_COMBAT)
 			return
 		end
 		ToggleFriendsFrame(5)
@@ -265,10 +267,10 @@ end
 
 function mod:Toggle()
 	if not self.db.enabled then
-		if KRURaidControlPanel then
-			KRURaidControlPanel:Hide()
-			if KRURaidControl_ShowButton then
-				KRURaidControl_ShowButton:Hide()
+		if _G.KRURaidControlPanel then
+			_G.KRURaidControlPanel:Hide()
+			if _G.KRURaidControl_ShowButton then
+				_G.KRURaidControl_ShowButton:Hide()
 			end
 		end
 		return

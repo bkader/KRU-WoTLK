@@ -1,4 +1,5 @@
 assert(KRU, "Raid Utilities not found!")
+local KRU = KRU
 
 -- > start of module declaration and options < --
 local L = KRU.L
@@ -187,7 +188,6 @@ function GetOptions()
 							end,
 							set = function(_, val)
 								mod.db.keyword = val:trim()
-								keyword = (mod.db.keyword ~= "") and mod.db.keyword or nil
 							end
 						},
 						guildkeyword = {
@@ -203,7 +203,6 @@ function GetOptions()
 							end,
 							set = function(_, val)
 								mod.db.guildkeyword = val:trim()
-								guildkeyword = (mod.db.guildkeyword ~= "") and mod.db.guildkeyword or nil
 							end
 						}
 					}
@@ -252,12 +251,12 @@ inviteFrame:SetScript("OnEvent", function(self, event, msg, sender)
 	if (mod.db.keyword and msg == mod.db.keyword) or (mod.db.guildkeyword and msg == mod.db.guildkeyword and IsGuildMember(sender) and CanInvite()) then
 		local inInstance, instanceType = IsInInstance()
 		local numparty, numraid = GetNumPartyMembers(), GetNumRaidMembers()
-		if inInstance and instanceType == "party" and party == 4 then
+		if inInstance and instanceType == "party" and numparty == 4 then
 			SendChatMessage(L["Sorry, the group is full."], "WHISPER", nil, sender)
-		elseif party == 4 and raid == 0 then
+		elseif numparty == 4 and numraid == 0 then
 			inviteQueue[#inviteQueue + 1] = sender
 			DoActualInvites()
-		elseif raid == 40 then
+		elseif numraid == 40 then
 			SendChatMessage(L["Sorry, the group is full."], "WHISPER", nil, sender)
 		else
 			InviteUnit(sender)
