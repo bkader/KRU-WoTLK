@@ -289,8 +289,8 @@ function mod:OnInitialize()
 end
 
 function mod:OnEnable()
-	GuildRoster()
 	inGuild = IsInGuild()
+	if inGuild then GuildRoster() end
 
 	if self.db.keyword or self.db.guildkeyword then
 		inviteFrame:RegisterEvent("CHAT_MSG_BN_WHISPER")
