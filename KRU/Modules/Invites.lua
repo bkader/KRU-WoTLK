@@ -226,6 +226,7 @@ function GetOptions()
 							width = "double",
 							order = 0
 						}
+						
 					}
 				}
 			}
@@ -267,24 +268,6 @@ end)
 function mod:OnInitialize()
 	self.db = KRU.db.profile.invites
 	options = options or GetOptions()
-	if inGuild then
-		local ranks, numorder = ListGuildRanks(), 1
-		for i, name in ipairs(ranks) do
-			options.args.rankinvite.args[name .. i] = {
-				type = "execute",
-				name = name,
-				desc = L:F("Invite all guild members of rank %s or higher.", name),
-				order = numorder,
-				func = function()
-					InviteRank(i, name)
-				end,
-				disabled = function()
-					return not CanInvite()
-				end
-			}
-			numorder = numorder + 1
-		end
-	end
 	KRU.options.args.invites = options
 end
 
@@ -311,10 +294,35 @@ function mod:OnEnable()
 			KRU:OpenConfig("invites")
 		end
 	end
+
+	self.db = KRU.db.profile.invites
+	options = options or GetOptions()
+	KRU.options.args.invites = options
 end
 
 function mod:GUILD_ROSTER_UPDATE()
 	inGuild = IsInGuild()
 	wipe(guildRanks)
 	guildRanks = inGuild and ListGuildRanks() or {}
+	if inGuild then
+		guild_rank_menu()
+	end
+end
+
+function guild_rank_menu()
+	local ranks = ListGuildRanks()
+	for i, name in ipairs(ranks) do
+		options.args.rankinvite.args[name..i] = {
+			type = "execute",
+			name = L:F("%s", name),
+			desc = L:F("Invite all guild members of rank %s or higher.", name),
+			order = i,
+			disabled = function()
+				return not CanInvite()
+			end,
+			func = function()
+				InviteRank(i, name)
+			end
+		}
+	end
 end
