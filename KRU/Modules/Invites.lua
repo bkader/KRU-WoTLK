@@ -17,7 +17,7 @@ local inGuild
 local guildRanks, GetGuildRanks = {}
 local options, GetOptions
 
-local DoActualInvites, DoGuildInvites
+local DoActualInvites, DoGuildInvites, ListGuildRanks
 local inviteFrame, inviteQueue = CreateFrame("Frame"), {}
 
 local function CanInvite()
@@ -131,7 +131,7 @@ end
 
 function GetOptions()
 	if not options then
-		inGuild = inGuild or IsInGuild()
+		inGuild = IsInGuild()
 
 		options = {
 			type = "group",
@@ -226,7 +226,6 @@ function GetOptions()
 							width = "double",
 							order = 0
 						}
-						
 					}
 				}
 			}
@@ -236,7 +235,7 @@ function GetOptions()
 end
 
 local function IsGuildMember(name)
-	inGuild = inGuild or IsInGuild()
+	inGuild = IsInGuild()
 	if inGuild then
 		for i = 1, GetNumGuildMembers() do
 			local n = GetGuildRosterInfo(i)
@@ -268,7 +267,31 @@ end)
 function mod:OnInitialize()
 	self.db = KRU.db.profile.invites
 	options = options or GetOptions()
-	KRU.options.args.invites = options
+
+	KRU.After(2, function()
+		inGuild = IsInGuild()
+
+		if inGuild then
+			GuildRoster()
+			local ranks, numorder = ListGuildRanks(), 1
+			for i, name in ipairs(ranks) do
+				options.args.rankinvite.args[name .. i] = {
+					type = "execute",
+					name = name,
+					desc = L:F("Invite all guild members of rank %s or higher.", name),
+					order = numorder,
+					func = function()
+						InviteRank(i, name)
+					end,
+					disabled = function()
+						return not CanInvite()
+					end
+				}
+				numorder = numorder + 1
+			end
+		end
+		KRU.options.args.invites = options
+	end)
 end
 
 function mod:OnEnable()
@@ -294,35 +317,10 @@ function mod:OnEnable()
 			KRU:OpenConfig("invites")
 		end
 	end
-
-	self.db = KRU.db.profile.invites
-	options = options or GetOptions()
-	KRU.options.args.invites = options
 end
 
 function mod:GUILD_ROSTER_UPDATE()
 	inGuild = IsInGuild()
 	wipe(guildRanks)
 	guildRanks = inGuild and ListGuildRanks() or {}
-	if inGuild then
-		guild_rank_menu()
-	end
-end
-
-function guild_rank_menu()
-	local ranks = ListGuildRanks()
-	for i, name in ipairs(ranks) do
-		options.args.rankinvite.args[name..i] = {
-			type = "execute",
-			name = L:F("%s", name),
-			desc = L:F("Invite all guild members of rank %s or higher.", name),
-			order = i,
-			disabled = function()
-				return not CanInvite()
-			end,
-			func = function()
-				InviteRank(i, name)
-			end
-		}
-	end
 end
